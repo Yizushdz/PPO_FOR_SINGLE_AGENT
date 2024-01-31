@@ -14,6 +14,7 @@ from utils import import_train_configuration, set_sumo, set_train_path
 
 
 if __name__ == "__main__":
+    print("Hello")
 
     config = import_train_configuration(config_file='training_settings.ini')
     sumo_cmd = set_sumo(config['gui'], config['sumocfg_file_name'], config['max_steps'])
