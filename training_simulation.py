@@ -16,7 +16,7 @@ PHASE_EWL_YELLOW = 7
 
 
 class Simulation:
-    def __init__(self, Model, Memory, TrafficGen, sumo_cmd, gamma, max_steps, green_duration, yellow_duration, num_states, num_actions, training_epochs):
+    def __init__(self, Model, Memory, TrafficGen, sumo_cmd, gamma, max_steps, green_duration, yellow_duration, num_states, num_actions, training_epochs, ppo):
         self._Model = Model
         self._Memory = Memory
         self._TrafficGen = TrafficGen
@@ -32,6 +32,7 @@ class Simulation:
         self._cumulative_wait_store = []
         self._avg_queue_length_store = []
         self._training_epochs = training_epochs
+        self._ppo = ppo # the PPO agent object
 
 
     def run(self, episode, epsilon):
@@ -42,8 +43,8 @@ class Simulation:
 
         # first, generate the route file for this simulation and set up sumo
         self._TrafficGen.generate_routefile(seed=episode)
-        traci.start(self._sumo_cmd)
-        print("Simulating...")
+        # traci.start(self._sumo_cmd)
+        # print("Simulating...")
 
         # inits
         self._step = 0
